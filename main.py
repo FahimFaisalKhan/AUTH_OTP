@@ -15,7 +15,8 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 load_dotenv()
 app.config['SECRET_KEY'] = os.getenv("SECRET")
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("URI")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    "DATABASE_URL").replace("://", "ql://", 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -82,8 +83,9 @@ class Devices(db.Model):
     parent = relationship('User', back_populates='child_device', lazy=True)
     device_ip = db.Column(db.String(250), unique=True, nullable=False)
 
+
 # Line below only required once, when creating DB.
-# db.create_all()
+db.create_all()
 
 
 @app.route('/')
@@ -206,4 +208,4 @@ def download():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
