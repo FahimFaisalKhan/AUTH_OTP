@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="box">
+  <h1>Register</h1>
+  {%with i=get_flashed_messages()%} {%if i:%} {%for j in i:%}
+
+  <p id="notification">{{j}}</p>
+  {%endfor%} {%endif%} {%endwith%}
+  <form action="{{ url_for('register') }}" method="post" novalidate>
+    <input type="text" name="name" placeholder="Name" required="required" />
+    <input type="email" name="email" placeholder="Email" required="required" />
+
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      required="required"
+    />
+    <button type="submit" class="btn btn-primary btn-block btn-large">
+      Sign me up.
+    </button>
+  </form>
+  <script>
+    const not = document.getElementById("notification");
+    if (not.innerText.includes("verify")) {
+      not.classList.add("text-warning");
+    }
+  </script>
+</div>
+
+{% endblock %}
