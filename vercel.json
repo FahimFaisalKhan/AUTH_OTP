@@ -13,7 +13,6 @@
     }
   ],
 
-  "s-maxage": "0",
   "headers": [
     {
       "source": "/service-worker.js",
