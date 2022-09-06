@@ -12,7 +12,7 @@
       "dest": "/"
     }
   ],
-  "Origin Control": "off",
+
   "s-maxage": "0",
   "headers": [
     {
